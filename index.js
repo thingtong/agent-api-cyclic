@@ -7,8 +7,11 @@ const http = require('http');
 mongoose.Promise = global.Promise;*/
 
 const express = require('express');
+const fs = require("fs");
+var path = require('path');
 const app = express();
 const mongoose = require('mongoose');
+
 const PORT = process.env.PORT || 3000 ;
 //const agents = require('./modules/agents');
 
@@ -20,12 +23,37 @@ const agents = mongoose.model('agents', new mongoose.Schema({
   contractStatus: Number,
   employeeId: String
 }));
+//////////////////////////////////////////////////////////////
+function authentication(req, res, next) {
+  var authheader = req.headers.authorization;
+  console.log(req.headers);
+  if (!authheader) {
+      var err = new Error('You are not authenticated!');
+      res.setHeader('WWW-Authenticate', 'Basic');
+      err.status = 401;
+      return next(err)
+  }
+  var auth = new Buffer.from(authheader.split(' ')[1],
+  'base64').toString().split(':');
+  var user = auth[0];
+  var pass = auth[1];
+  if (user == 'admin' && pass == 'password') {
+    // If Authorized user
+      next();
+  } else {
+      var err = new Error('You are not authenticated!');
+      res.setHeader('WWW-Authenticate', 'Basic');
+      err.status = 401;
+      return next(err);
+  }
 
+}
+/////////////////////////////////////////////////////////
 
+app.use(authentication)
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(express.json());
-
-
 app.post('/agent', async (req, res) => {
   const payload = req.body;
   //const employeeId = payload.employeeId
@@ -52,14 +80,9 @@ app.post('/agent', async (req, res) => {
     "message": "User with employeeId = "+employeeId+" is update",
     "user": ress
   });
-  //const agent = new agents(payload);
-  //await product.save();
- // res.status(201).end();
 });
-
-
 app.listen(PORT, () => {
-  console.log('Application is running on port .${PORT}');
+  console.log('Application is running on port'+ PORT);
 });
 
 
