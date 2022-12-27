@@ -4,7 +4,8 @@ var path = require('path');
 const app = express();
 const mongoose = require('mongoose');
 const PORT = process.env.PORT || 3000 ;
-mongoose.connect('mongodb://localhost:27017/test', {
+//mongoose.connect('mongodb://localhost:27017/test', {
+  mongoose.connect('mongodb://myUserAdmin:hehzyvc1fdt9k4ug@150.95.80.101:27017/test?authSource=admin', {
   useNewUrlParser: true
 });
 const agents = mongoose.model('agents', new mongoose.Schema({
@@ -40,7 +41,7 @@ function authentication(req, res, next) {
 app.use(authentication)
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
-app.post('/agent', async (req, res) => {
+app.post('/update/contactStatus', async (req, res) => {
   const payload = req.body;
   const employeeIds = payload.employeeId
   const employeeId = { employeeId: payload.employeeId };
