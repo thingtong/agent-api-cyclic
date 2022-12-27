@@ -14,8 +14,8 @@ const mongoose = require('mongoose');
 
 const PORT = process.env.PORT || 3000 ;
 //const agents = require('./modules/agents');
-
-mongoose.connect('mongodb://localhost:27017/test', {
+mongoose.connect('mongodb://myUserAdmin:hehzyvc1fdt9k4ug@150.95.80.101:27017/test?authSource=admin', {
+//mongoose.connect('mongodb://localhost:27017/test', {
   useNewUrlParser: true
 });
 
@@ -56,7 +56,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 app.post('/agent', async (req, res) => {
   const payload = req.body;
-  //const employeeId = payload.employeeId
+  const employeeIds = payload.employeeId
   
   const employeeId = { employeeId: payload.employeeId };
   const contractStatus = { contractStatus: payload.contractStatus };
@@ -77,7 +77,7 @@ app.post('/agent', async (req, res) => {
   
   res.status(200).send({
     "status": "ok",
-    "message": "User with employeeId = "+employeeId+" is update",
+    "message": 'agent with employeeId = ' + employeeIds + ' is update',
     "user": ress
   });
 });
