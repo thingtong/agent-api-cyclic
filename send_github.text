@@ -10,3 +10,9 @@ git push -u origin main
 git remote add origin https://github.com/thingtong/agent-api-cyclic.git
 git branch -M main
 git push -u origin main
+Basic YWRtaW46cGFzc3dvcmQ=
+exp 
+{
+    "employeeId": "01057813",
+    "contractStatus": 0
+}
