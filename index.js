@@ -10,6 +10,7 @@ const PORT = process.env.PORT || 3000 ;
 });
 const agents = mongoose.model('agents', new mongoose.Schema({
   contractStatus: Number,
+  status: Number,
   employeeId: String
 }));
 //////////////////////////////////////////////////////////////
@@ -44,7 +45,7 @@ app.use(express.json());
 app.post('/update/contactStatus', async (req, res) => {
   const payload = req.body;
   const employeeIds = payload.employeeId
-  const employeeId = { employeeId: payload.employeeId };
+  const employeeId = { employeeId: payload.employeeId,contractStatus:'2'};
   const contractStatus = { contractStatus: payload.contractStatus };
   await agents.countDocuments(employeeId); // 0
   let ress = await agents.findOneAndUpdate(employeeId, contractStatus, {
@@ -60,8 +61,25 @@ app.post('/update/contactStatus', async (req, res) => {
     "user": ress
   });
 });
+app.post('/update/status', async (req, res) => {
+  const payload = req.body;
+  const employeeIds = payload.employeeId
+  const employeeId = { employeeId: payload.employeeId };
+  const status= { status: payload.status };
+  await agents.countDocuments(employeeId); // 0
+  let ress = await agents.findOneAndUpdate(employeeId, status, {
+    new: true,
+    upsert: true,
+    rawResult: true // Return the raw result from the MongoDB driver
+  });
+  ress.value instanceof agents; // true
+  ress.lastErrorObject.updatedExisting; // false
+  res.status(200).send({
+    "status": "ok",
+    "message": 'agent with employeeId = ' + employeeIds + ' is update',
+    "user": ress
+  });
+});
 app.listen(PORT, () => {
   console.log('Application is running on port'+ PORT);
 });
-
-
