@@ -18,4 +18,8 @@ exp
 }
 https://agent-api-jp4l.onrender.com/update/contactStatus
 https://dashboard.render.com/
+<<<<<<< HEAD
 https://tough-jeans-bear.cyclic.app/update/contactStatus
+=======
+https://tough-jeans-bear.cyclic.app/update/contactStatus
+>>>>>>> 42d571e790fea5dd5ac53cc30ba2264849bfd58f
