@@ -45,8 +45,8 @@ app.use(express.json());
 app.post('/update/contactStatus', async (req, res) => {
   const payload = req.body;
   const employeeIds = payload.employeeId
-  const employeeId = { employeeId: payload.employeeId,contractStatus:'2'};
-  const contractStatus = { contractStatus: payload.contractStatus };
+  const employeeId = { employeeId: payload.employeeId};
+  const contractStatus = { contractStatus: payload.contractStatus,contractStatus: '2' };
   await agents.countDocuments(employeeId); // 0
   let ress = await agents.findOneAndUpdate(employeeId, contractStatus, {
     new: true,
