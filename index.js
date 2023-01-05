@@ -4,8 +4,8 @@ var path = require('path');
 const app = express();
 const mongoose = require('mongoose');
 const PORT = process.env.PORT || 3000 ;
-mongoose.connect('mongodb://localhost:27017/test', {
- // mongoose.connect('mongodb://myUserAdmin:hehzyvc1fdt9k4ug@150.95.80.101:27017/test?authSource=admin', {
+//mongoose.connect('mongodb://localhost:27017/test', {
+mongoose.connect('mongodb://myUserAdmin:hehzyvc1fdt9k4ug@150.95.80.101:27017/test?authSource=admin', {
   useNewUrlParser: true
 });
 const agents = mongoose.model('agents', new mongoose.Schema({
