@@ -4,8 +4,8 @@ var path = require('path');
 const app = express();
 const mongoose = require('mongoose');
 const PORT = process.env.PORT || 3000 ;
-//mongoose.connect('mongodb://localhost:27017/test', {
-mongoose.connect('mongodb://myUserAdmin:hehzyvc1fdt9k4ug@150.95.80.101:27017/test?authSource=admin', {
+mongoose.connect('mongodb://localhost:27017/test', {
+//mongoose.connect('mongodb://myUserAdmin:hehzyvc1fdt9k4ug@150.95.80.101:27017/test?authSource=admin', {
   useNewUrlParser: true
 });
 const agents = mongoose.model('agents', new mongoose.Schema({
@@ -36,7 +36,6 @@ function authentication(req, res, next) {
       err.status = 401;
       return next(err);
   }
-
 }
 /////////////////////////////////////////////////////////
 app.use(authentication)
@@ -45,12 +44,9 @@ app.use(express.json());
 app.post('/update/contactStatus', async (req, res) => {
   const payload = req.body;
   const employeeIds = payload.employeeId
-  const filter = { 'employeeId': payload.employeeId,'contractStatus': { $ne: 2 } };
+  const filter = { 'employeeId': payload.employeeId,'contractStatus': { $ne: 1 } };
   const update = { contractStatus: payload.contractStatus };
-
-  
-
- await agents.countDocuments(filter); // 0
+  await agents.countDocuments(filter); // 0
   let ress = await agents.findOneAndUpdate(filter, update, {
     new: true,
     upsert: false,
@@ -64,9 +60,6 @@ app.post('/update/contactStatus', async (req, res) => {
     "user": ress
   });
 });
-
-
-
 app.post('/update/status', async (req, res) => {
   const payload = req.body;
   const employeeIds = payload.employeeId
