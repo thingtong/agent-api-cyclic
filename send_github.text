@@ -1,2 +1,22 @@
 
-
+…or create a new repository on the command line
+echo "# agent-api-cyclic" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/thingtong/agent-api-cyclic.git
+git push -u origin main
+…or push an existing repository from the command line
+git remote add origin https://github.com/thingtong/agent-api-cyclic.git
+git branch -M main
+git push -u origin main
+Basic YWRtaW46cGFzc3dvcmQ=
+exp 
+{
+    "employeeId": "01057813",
+    "contractStatus": 0
+}
+https://agent-api-jp4l.onrender.com/update/contactStatus
+https://dashboard.render.com/
+https://tough-jeans-bear.cyclic.app/update/contactStatus
