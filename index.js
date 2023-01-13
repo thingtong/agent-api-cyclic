@@ -4,6 +4,7 @@ var path = require('path');
 const app = express();
 const mongoose = require('mongoose');
 const PORT = process.env.PORT || 3000 ;
+<<<<<<< HEAD
 //const crypto = require("crypto");
 const crypto = require('crypto-js');
 password = 'd6F3Efeq';
@@ -11,6 +12,11 @@ console.log();
 var db=decrypt("U2FsdGVkX1+v4xmRAhetcM6bKAUSgMzv+rYfTd9g0jJxxyjfXTe0r9XNUy+xe7P4I034+C5EzcVm61cMEqEkBs7CUbtD7XfYblIiY12KbzUhFyNOg1HwjBiIt0ug0+7hLmr+5Nn1x0IWB2FKnAENlA==")
 mongoose.connect(db, {
 useNewUrlParser: true
+=======
+mongoose.connect('mongodb://localhost:27017/test', {
+//mongoose.connect('mongodb://myUserAdmin:hehzyvc1fdt9k4ug@150.95.80.101:27017/test?authSource=admin', {
+  useNewUrlParser: true
+>>>>>>> 368a16620cda57b7ee1b4934ce374284ecbfc565
 });
 const agents = mongoose.model('agents', new mongoose.Schema({
   contractStatus: Number,
